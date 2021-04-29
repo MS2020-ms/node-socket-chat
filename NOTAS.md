@@ -3,9 +3,9 @@
 navegador: 
 http://localhost:3000/
 http://localhost:3000/chat.html
-http://localhost:3000/chat.html?nombre=Fernando
-http://localhost:3000/chat.html?nombre=Melissa
-http://localhost:3000/chat.html?nombre=Juan
+http://localhost:3000/chat.html?nombre=Fernando&sala=Juegos
+http://localhost:3000/chat.html?nombre=Melissa&sala=Juegos
+http://localhost:3000/chat.html?nombre=Juan&sala=Amigos
 # Clases para controlar los usuarios del chat
 - crear server/clases/usuarios.js
 # Frontend conectar un usuario
@@ -34,3 +34,15 @@ http://localhost:3000/chat.html?nombre=Juan
 - ir server/classes/usuarios.js
 # Mensajes y notificaciones a las salas de chat
 - ir sockets/socket.js
+# Diseno de sala de chat
+# Renderizar usuarios
+- crear js/socket-chat-jquery.js
+- ir chat.html e importar <script src="js/socket-chat-jquery.js"></script>
+- ir public/js/socket-chat.js
+# Obtener ID del usuario conectado
+- crear js/socket-chat-jquery.js
+# Enviar y renderizar mensajes
+- ir chat.html -> <form id="formEnviar">
+- crear js/socket-chat-jquery.js
+- ir sockets/socket.js
+

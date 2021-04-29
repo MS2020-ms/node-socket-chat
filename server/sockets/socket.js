@@ -26,13 +26,14 @@ io.on('connection', (client) => {
 
         //broadcast para informar a todos los usuarios de una misma sala de chat. Con emit, emite el evento 'listaPersonas'
         //listaPersonas definido en socket-chat.js
-        client.broadcast.to(data.para).emit('listaPersonas', usuarios.getPersonasPorSala(data.sala));
+        client.broadcast.to(data.sala).emit('listaPersonas', usuarios.getPersonasPorSala(data.sala));
+        client.broadcast.to(data.sala).emit('crearMensaje', crearMensaje('Administrador', `${data.nombre} se unió al chat`));
 
         callback(usuarios.getPersonasPorSala(data.sala));
     });
 
     //Cuando usuario llama al metodo de crearMensaje
-    client.on('crearMensaje', (data) => {
+    client.on('crearMensaje', (data, callback) => {
 
         let persona = usuarios.getPersona(client.id);
 
@@ -40,7 +41,9 @@ io.on('connection', (client) => {
         // Enviar información o Escuchar informacion: EMIT
         // A todo el mundo: .broadcast
         // A solo los usuarios de una sala de chat: .broadcast.to(data.para) o (persona.para)
-        client.broadcast.to(persona.para).emit('crearMensaje', mensaje);
+        client.broadcast.to(persona.sala).emit('crearMensaje', mensaje);
+
+        callback(mensaje);
     });
 
     //Cuando usuario desconecta
